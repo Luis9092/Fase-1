@@ -16,8 +16,26 @@
 #include "Maestro_ventas.h"
 #include <conio.h>
 #include <fstream>
-//NOTA:::: lo que haria falta es lo de validar en compras(modificar) y validar las demas tablas 
-//ejemplo Empleados que valide el puesto 
+#include "SerialPort.h"
+
+
+typedef std::basic_ifstream<TCHAR> tifstream;
+typedef std::basic_string<TCHAR> tstring;
+using namespace  std;
+
+char output[MAX_DATA_LENGTH];
+char incomingData[MAX_DATA_LENGTH];
+
+char commport[] = "\\\\.\\COM3";
+char* port = commport;
+SerialPort arduino(port);
+
+void automatico();
+void apagar();
+void encender();
+
+
+
 typedef std::basic_ifstream<TCHAR> tifstream;
 typedef std::basic_string<TCHAR> tstring;
 
@@ -97,6 +115,7 @@ void mostrar_Maestro_detalle_ventas();
 void eliminar_Maestro_detalle_ventas();
 void modificar_Maestro_detalle_ventas();
 void txt();
+void Banda_transportadora();
 int main() {
 	_getch();
 	//insertar_Maestro_detalle_ventas();
@@ -291,7 +310,8 @@ void control1() {
 		gotoxy(70, 13); cout << ("6.   C L I E N T E S ");
 		gotoxy(70, 14); cout << ("7.   C O M  P R A S");
 		gotoxy(70, 15); cout << ("8.   V E N T A S ");
-		gotoxy(70, 16); cout << ("9.   S A L I R ");
+		gotoxy(70, 15); cout << ("9.   B A N D A    T R A N S P O R T A D O R A  ");
+		gotoxy(70, 16); cout << ("10.   S A L I R ");
 		gotoxy(70, 20); cout << ("Ingresar Opcion: ");
 		cin >> a;
 		switch (a) {
@@ -328,9 +348,13 @@ void control1() {
 			control8();
 			break;
 
+		case 9: system("cls");
+			Banda_transportadora();
+			break;
+
 		}
 
-	} while (a != 9);
+	} while (a != 10);
 }
 
 void control() {
@@ -1293,8 +1317,10 @@ void insertar_Maestro_detalle_ventas() {
 	gotoxy(45, 1); cout << ("|                 R E G I S T R A R            V E N T A S                        |");
 	gotoxy(45, 2); cout << ("|_________________________________________________________________________________|");
 	cout << ("\n\n");
+
+	automatico();
+
 	Mv.Leer_empleado();
-	
 	Mv.Leer_productos();
 	Mv.Leer_cliente();
 
@@ -1621,3 +1647,79 @@ void marco() {
 	}
 }
 
+void encender() {
+
+	string data = "a";
+
+
+	char* charArray = new char[data.size() + 1];
+	copy(data.begin(), data.end(), charArray);
+	charArray[data.size()] = '\n';
+
+	arduino.writeSerialPort(charArray, MAX_DATA_LENGTH);
+	arduino.readSerialPort(output, MAX_DATA_LENGTH);
+
+	cout << ">> " << output << endl;
+	delete[] charArray;
+	system("pause");
+
+}
+
+void apagar() {
+	string data = "e";
+
+
+	char* charArray = new char[data.size() + 1];
+	copy(data.begin(), data.end(), charArray);
+	charArray[data.size()] = '\n';
+
+	arduino.writeSerialPort(charArray, MAX_DATA_LENGTH);
+	arduino.readSerialPort(output, MAX_DATA_LENGTH);
+
+	cout << ">> " << output << endl;
+
+	delete[] charArray;
+	system("pause");
+}
+
+void automatico() {
+	string data = "z";
+
+
+	char* charArray = new char[data.size() + 1];
+	copy(data.begin(), data.end(), charArray);
+	charArray[data.size()] = '\n';
+
+	arduino.writeSerialPort(charArray, MAX_DATA_LENGTH);
+	arduino.readSerialPort(output, MAX_DATA_LENGTH);
+
+	cout << ">> " << output << endl;
+
+	delete[] charArray;
+}
+
+
+void Banda_transportadora() {
+	int x;
+	do {
+		system("cls");
+		gotoxy(47, 1); cout << ("같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같�");
+		gotoxy(47, 2); cout << ("같                                                                       같");
+		gotoxy(47, 3); cout << ("같                B A N D A    T R A N S P O R T A D O R A               같");
+		gotoxy(47, 4); cout << ("같                                                                       같");
+		gotoxy(47, 5); cout << ("같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같�");
+
+		cout << ("\n\n\n\n\t\t\t\t\t\t1.   Encender");
+		cout << ("\n\t\t\t\t\t\t2.   Apagar");
+		cout << ("\n\t\t\t\t\t\t3.   Salir");
+		cout << ("\n\n\n\t\t\t\t\t\tIngrese opcion: ");
+		cin >> x;
+		while (x == 1) {
+			encender();
+			while (x == 2) {
+				apagar();
+				break;
+			}
+		}
+	} while (x != 3);
+}

@@ -50,7 +50,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Proyecto Final.cpp" />
+    <ClCompile Include="SerialPort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cliente.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Productos.h" />
     <ClInclude Include="Proveedor.h" />
     <ClInclude Include="Puesto.h" />
+    <ClInclude Include="SerialPort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

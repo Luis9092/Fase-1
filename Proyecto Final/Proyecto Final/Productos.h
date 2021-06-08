@@ -284,58 +284,58 @@ public:
 
 				while (fila = mysql_fetch_row(resultado)) {
 
-					gotoxy(30, 7); cout << "------------    [" << fila[0] << "]     ------------- ";
-					gotoxy(25, 8); cout << "Producto: " << fila[1];
-					gotoxy(25, 9); cout << "Descripcion: " << fila[2];
-					gotoxy(25, 10); cout << "Imagen: " << fila[3];
-					gotoxy(25, 11); cout << "Precio Costo: " << fila[4];
-					gotoxy(25, 12); cout << "Precio Venta: " << fila[5];
-					gotoxy(25, 13); cout << "Existencia: " << fila[6];
-					gotoxy(25, 14); cout << "Fecha Ingreso; " << fila[7];
-					gotoxy(25, 15); cout << "Id Marca: " << fila[8];
+					 cout << "\n\n\t\t\t\t\t\t\t------------    [" << fila[0] << "]     ------------- ";
+					 cout << "\n\t\t\t\t\t\t\tProducto: " << fila[1];
+					 cout << "\n\t\t\t\t\t\t\tDescripcion: " << fila[2];
+					 cout << "\n\t\t\t\t\t\t\tImagen: " << fila[3];
+					 cout << "\n\t\t\t\t\t\t\tPrecio Costo: " << fila[4];
+					 cout << "\n\t\t\t\t\t\t\tPrecio Venta: " << fila[5];
+					 cout << "\n\t\t\t\t\t\t\tExistencia: " << fila[6];
+					 cout << "\n\t\t\t\t\t\t\tFecha Ingreso; " << fila[7];
+					 cout << "\n\t\t\t\t\t\t\tId Marca: " << fila[8];
 
 					cin.ignore();
-					cout << "\nIngrese el nuevo producto:\n";
+					cout << "\n\n\t\t\t\t\t\t\tIngrese el nuevo producto: ";
 					getline(cin, pro);
-					cout << "Ingrese la nueva descripcion:\n";
+					cout << "\n\t\t\t\t\t\t\tIngrese la nueva descripcion: ";
 					getline(cin, desc);
-					cout << "Ingrese la nueva imagen:\n";
+					cout << "\n\t\t\t\t\t\t\tIngrese la nueva imagen: ";
 					getline(cin, ima);
-					cout << "Ingrese el nuevo precio de costo\n";
+					cout << "Ingrese el nuevo precio de costo: ";
 					cin >> costop;
 					string uno = to_string(costop);
-					cout << "Ingrese el nuevo precio de venta\n";
+					cout << "\n\t\t\t\t\t\t\tIngrese el nuevo precio de venta: ";
 					cin >> ventap;
 					string dos = to_string(ventap);
-					cout << "Ingrese la nueva cantidad de existencias\n";
+					cout << "\n\t\t\t\t\t\t\tIngrese la nueva cantidad de existencias: ";
 					cin >> exis;
 					string tres = to_string(exis);
-					cout << "Ingrese el nuevo id de marca\n";
+					cout << "\n\t\t\t\t\t\t\tIngrese el nuevo id de marca: ";
 					cin >> idmarc;
 					string cua = to_string(idmarc);
-					cout << ("Desea modificarlo [s/n]: ");
+					cout << ("\n\n\t\t\t\t\t\t\tDesea modificarlo [s/n]: ");
 					cin >> s;
 					if ((s == 's') || (s == 'S')) {
 						string consulta2 = "update productos set producto = '" + pro + "', descripcion = '" + desc + "',  imagen = '" + ima + "', fecha_ingreso = " + fecha + ", precio_costo = " + uno + ", precio_venta = " + dos + ", existencia = " + tres + ", idMarca = " + cua + " where idProducto = " + Id + "";
 						const char* c = consulta2.c_str();
 						q_estado = mysql_query(cn.getConectar(), c);
 						if (!q_estado) {
-							cout << "\n\n--------- Modificacion exitosa  ---------" << endl;
+							cout << "\n\n\t\t\t\t\t\t\t--------- Modificacion exitosa  ---------" << endl;
 						}
 						else {
-							cout << "\n\n--------- Error al modificar  ---------" << endl;
+							cout << "\n\n\t\t\t\t\t\t\t--------- Error al modificar  ---------" << endl;
 						}
 					}
 				}
 
 			}
 			else {
-				cout << "\n\n--------- Error al modificar  ---------" << endl;
+				cout << "\n\n\t\t\t\t\t\t\t--------- Error al modificar  ---------" << endl;
 			}
 
 		}
 		else {
-			cout << " \n\n---------  Error en la Conexion ---------" << endl;
+			cout << " \n\n\t\t\t\t\t\t\t---------  Error en la Conexion ---------" << endl;
 		}
 		cn.cerrar_conexion();
 	}
